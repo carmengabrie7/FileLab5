@@ -4,6 +4,7 @@
  */
 package filelab5;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -13,17 +14,17 @@ import java.util.Scanner;
 public class FuncionEscribir_Leer {
     
         public void escribirArchivo(String nombreArchivo) {
-        Archivo archivoEncontrado = null;
+        File fileEncontrado = null;
 
         // Buscar archivo por nombre
-        for (Archivo a : carpetaActual.archivos) {
-            if (a.getNombre().equals(nombreArchivo)) {
-                archivoEncontrado = a;
+        for (File f :  ) {
+            if (f.getNombre().equals(nombreFile)) {
+                fileEncontrado = f;
                 break;
             }
         }
 
-        if (archivoEncontrado == null) {
+        if (fileEncontrado == null) {
             System.out.println("El archivo no existe.");
             return;
         }
@@ -33,7 +34,7 @@ public class FuncionEscribir_Leer {
         System.out.println("Escriba el texto que desea guardar en " + nombreArchivo + ":");
         String texto = input.next();
 
-        archivoEncontrado.setContenido(texto);
+        fileEncontrado.setContenido(texto);
 
         System.out.println("Texto guardado.");
     }

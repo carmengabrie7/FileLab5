@@ -12,8 +12,8 @@ public class MyFile {
     
     private File file=null;
     
- boolean crearFile()throws IOException{
-     return file.createNewFile();
+    boolean crearFile()throws IOException{
+        return file.createNewFile();
     }
     
     boolean crearFolder(){
