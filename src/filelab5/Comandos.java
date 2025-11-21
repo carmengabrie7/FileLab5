@@ -4,14 +4,14 @@ import java.io.File;
 
 
 public class Comandos {
-    private MyFile myfile = new MyFile();
+     MyFile archivo= new MyFile();
     //carpeta actual
    private File directorio = new File(System.getProperty("user.dir"));
    
    public String listaComandos(String linea){
        if (linea.trim().isEmpty()) return "";
-       String[] partes = linea.split(" "); //funciona para que separe el comando y el parametro
-       String cmd = partes[0]; //partes[0] - el comando
+       String[] partes = linea.split(" "); 
+       String cmd = partes[0]; 
        
        if (cmd.equalsIgnoreCase("mkdir")){
            
