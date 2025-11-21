@@ -1,13 +1,17 @@
 package filelab5;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class MyFile {
-
+    
     private File file = null;
+
 
     void setFile(String ruta){
         file = new File(ruta);
@@ -17,7 +21,7 @@ public class MyFile {
         return file;
     }
 
-    boolean crearFile() throws IOException {
+    boolean crearFile()throws IOException {
         return file.createNewFile();
     }
 
@@ -82,5 +86,30 @@ public class MyFile {
                 System.out.println(fecha + " " + hora + "   " + f.length() + " bytes  " + f.getName());
             }
         }
+    }
+    
+    boolean escribir(String texto) {
+        if (file == null || !file.exists()) return false;
+        try (FileWriter fw = new FileWriter(file, true)) {
+            fw.write(texto + "\n");
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    
+    //rd
+    String leer() {
+        if (file == null || !file.exists()) return null;
+        StringBuilder contenido = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                contenido.append(linea).append("\n");
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        return contenido.toString();
     }
 }

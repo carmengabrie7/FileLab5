@@ -4,8 +4,9 @@ import java.io.IOException;
 
 
 public class Comandos {
-   private MyFile file = new MyFile();
 
+   private MyFile file = new MyFile();
+   
     //carpeta actual
    private File directorio = new File(System.getProperty("user.dir"));
    
@@ -15,7 +16,7 @@ public class Comandos {
        String[] partes = linea.split(" "); //funciona para que separe el comando y el parametro
        String cmd = partes[0]; //parte 0 -> comando, parte 1 -> parametro
 
- 
+
        //crear carpeta
        if (cmd.equalsIgnoreCase("mkdir")){
          if (partes.length <2){
@@ -132,7 +133,19 @@ public class Comandos {
        }
        
        if (cmd.equalsIgnoreCase("wr")){
+           if (partes.length<2){
+               return "Debe seleccionar un archivo para escribir.";
+           }
            
+           String  nombre = partes[1];
+           String ruta = directorio.getAbsolutePath()+"\\"+nombre;
+           
+           file.setFile(ruta);
+           
+           if (!file.getFile().exists()){
+               return "El archivo no existe.";
+           }
+           return "Modo escritura activado. Ingrese el texto para escribir en: "+nombre;
        }
        
        if (cmd.equalsIgnoreCase("rd")){
@@ -144,6 +157,14 @@ public class Comandos {
            String ruta = directorio.getAbsolutePath()+"\\"+nombre;
            
            file.setFile(ruta);
+           
+           String contenido = file.leer();
+           
+           if (contenido ==null){
+               return "No se pudo leer el archivo.";
+           }
+           
+           return contenido;
            
        }
        
