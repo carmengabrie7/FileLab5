@@ -15,6 +15,12 @@ public class FileLab5 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MyFile archivo= new MyFile();
+        
+        System.out.println(archivo.fecha());
+        System.out.println(archivo.hora());
+        
+        
     }
     
 }
