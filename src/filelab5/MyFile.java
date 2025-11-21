@@ -29,22 +29,33 @@ public class MyFile {
         return file.mkdirs();
     }
 
-    boolean borrarC(File archivos) {
-        if (archivos.isDirectory()) {
-            for (File hijo : archivos.listFiles()) {
-                borrarC(hijo);
-            }
+    boolean borrarC(File f) {
+    File[] archivos = f.listFiles();
+
+    if (archivos != null) {
+        for (File hijo : archivos) {
+            borrarC(hijo);
         }
-        return archivos.delete();
     }
 
+    return f.delete();
+}
+
+
     boolean borrar() {
-        if (file == null) {
-            return false;
-        } else {
+    if (file == null || !file.exists()) return false;
+
+    try {
+        if (file.isDirectory()) {
             return borrarC(file);
+        } else {
+            return file.delete();
         }
+    } catch (Exception e) {
+        return false;
     }
+}
+
 
     String hora() {
         Date horaActual = new Date();
