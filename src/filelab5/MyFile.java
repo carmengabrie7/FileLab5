@@ -6,6 +6,9 @@ package filelab5;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -15,31 +18,45 @@ import java.io.IOException;
 
 public class MyFile {
     
-     private File mifile=null;
+    private File file=null;
     
  boolean crearFile()throws IOException{
-     return mifile.createNewFile();
+     return file.createNewFile();
     }
     
     boolean crearFolder(){
-        return mifile.mkdirs();
+        return file.mkdirs();
     }
     
-    boolean borrarAux(File mf){
-        if(mf.isDirectory()){
-            for(File child:mf.listFiles()){
-                borrarAux(child);
+    boolean borrarC(File archivos){
+        if(archivos.isDirectory()){
+            for(File hijo:archivos.listFiles()){
+                borrarC(hijo);
             }
         }
-        return mifile.delete();
+        return file.delete();
     }  
     
     boolean borrar(){
-        if(mifile==null){
+        if(file==null){
             return false;
         }else{
-            return borrarAux(mifile);
+            return borrarC(file);
         }
+    }
+    
+    String hora(){
+        Date horaActual= new Date();
+        SimpleDateFormat horaFormato= new SimpleDateFormat("HH:mm:ss");
+        String hora= horaFormato.format(horaActual);
+        return hora;
+    }
+    
+    String fecha(){
+        Date fechActual= new Date();
+        SimpleDateFormat fechaFormato= new SimpleDateFormat("MM/dd/yy");
+        String fecha= fechaFormato.format(fechActual);
+        return fecha;        
     }
     
 }
